@@ -1,13 +1,8 @@
-# Aula 11 — Agentes Inteligentes (Capítulo 2)
+# Aula 11 - Agentes Inteligentes
 
-Atividade da aula de 19/10/2026 · Profa. Kadidja Valéria · UDF
+Atividade da aula de 19/10/2026 - Profa. Kadidja Valéria
 
-| Arquivo | Conteúdo |
-|---|---|
-| [`RenatoMSA_Atividade_AgentesInteligentes.md`](RenatoMSA_Atividade_AgentesInteligentes.md) | Resolução completa: 2.3 (9 afirmações V/F), 2.4 (7 casos PEAS + quadro-resumo + comparação), 2.5 (10 conceitos), síntese com autômatos e referências |
-| [`agente_leilao_automato.py`](agente_leilao_automato.py) | Implementação executável do autômato da síntese (agente de lances em leilão) |
+- `RenatoMSA_Atividade_AgentesInteligentes.md` - respostas dos exercícios 2.3, 2.4, 2.5 e a síntese com autômatos
+- `agente_leilao_automato.py` - código do autômato do leilão que usei na síntese
 
-```bash
-python agente_leilao_automato.py          # limite R$ 300, incremento R$ 20
-python agente_leilao_automato.py 350 25   # limite e incremento personalizados
-```
+Para rodar: `python agente_leilao_automato.py`

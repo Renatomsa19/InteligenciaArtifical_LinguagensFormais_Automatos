@@ -5,7 +5,7 @@
 > **Estudante:** Renato (Renatomsa19) · **Turma:** _[preencher]_
 > **Material-base:** Russell & Norvig — Capítulo 2, *Agentes inteligentes*
 
-Resolução dos exercícios 2.3, 2.4 e 2.5, seguida da síntese com autômatos. Junto deste arquivo está o script [`agente_leilao_automato.py`](agente_leilao_automato.py), que **executa** o autômato descrito na síntese.
+Resolução dos exercícios 2.3, 2.4 e 2.5, seguida da síntese com autômatos. Também fiz o autômato da síntese em Python ([`agente_leilao_automato.py`](agente_leilao_automato.py)).
 
 ---
 
@@ -259,7 +259,7 @@ Em todos os casos o agente foi delimitado como um **agente artificial** (robô o
 |---|---|---|
 | **Agente** | Qualquer coisa que percebe o ambiente por sensores e age sobre ele por atuadores. Pode ser pessoa, robô ou programa — o que importa é o ciclo *perceber → decidir → agir*. | Um app de trânsito que recebe a posição dos carros (sensores) e muda a rota sugerida na tela (atuador). |
 | **Função de agente** | Descrição abstrata do comportamento: para **cada sequência possível** de percepções, diz qual ação o agente executa. É uma especificação matemática, não um código. | A tabela "histórico [A: sujo] → aspirar; [A: limpo] → ir para B; …" de um aspirador de duas salas. |
-| **Programa de agente** | Implementação concreta da função, que roda numa arquitetura real. Recebe uma percepção por vez e guarda em memória o que precisar do passado. | O código Python [`agente_leilao_automato.py`](agente_leilao_automato.py) que lê um evento do leilão e devolve uma ação. |
+| **Programa de agente** | Implementação concreta da função, que roda numa arquitetura real. Recebe uma percepção por vez e guarda em memória o que precisar do passado. | O código [`agente_leilao_automato.py`](agente_leilao_automato.py), que recebe o lance do rival e devolve uma ação usando a tabela de transições. |
 | **Racionalidade** | Escolher, a cada momento, a ação com o **maior desempenho esperado**, considerando a medida de desempenho, o conhecimento prévio, as ações possíveis e as percepções até agora. Não é acertar sempre. | Levar guarda-chuva quando a previsão é 70% de chuva é racional, mesmo que no fim não chova. |
 | **Autonomia** | Quanto o comportamento do agente depende da **própria experiência** em vez de apenas do conhecimento colocado pelo projetista. Mais autonomia = melhor adaptação a situações não previstas. | Um robô de entregas que aprende sozinho que um corredor do prédio vive bloqueado e passa a evitá-lo. |
 | **Agente reativo** | Decide olhando **só a percepção atual**, com regras *se condição então ação*. É simples e rápido, mas falha quando o ambiente não é totalmente observável. | Porta automática: *se* sensor detecta presença *então* abre. |
@@ -333,28 +333,21 @@ Regras complementares (para o autômato ficar completo):
 
 **Limitação da simplificação.** Com só três estados o agente não representa **quanto** falta para o limite, **quanto tempo** resta nem o **perfil dos rivais**. Ele cobre sempre que pode, então não consegue usar estratégias melhores, como esperar os últimos segundos (*sniping*) ou economizar evitando guerras de lances no começo. Além disso, o valor do lance e o limite ficam fora do autômato (são variáveis numéricas do programa). Para decidir com isso seria preciso um agente baseado em utilidade, e o modelo deixaria de ser um autômato finito simples.
 
-**Execução.** O arquivo [`agente_leilao_automato.py`](agente_leilao_automato.py) implementa essa tabela de transições e simula dois leilões. Saída real:
+**Execução.** Fiz o autômato em Python no arquivo [`agente_leilao_automato.py`](agente_leilao_automato.py). Testei com dois leilões, no primeiro o agente ganha e no segundo desiste porque passou do limite:
 
 ```text
-$ python agente_leilao_automato.py
-=== Cenário 1 — rivais param antes do limite ===
-Limite do agente: R$ 300,00 | incremento: R$ 20,00
-passo | percepção                | estado -> próximo          | ação
-------+--------------------------+----------------------------+---------------------------
-    1 | rival deu R$ 150,00      | SUPERADO   -> LIDERANDO    | dar lance de R$ 170,00
-    2 | rival deu R$ 190,00      | LIDERANDO  -> LIDERANDO    | dar lance de R$ 210,00
-    3 | rival deu R$ 230,00      | LIDERANDO  -> LIDERANDO    | dar lance de R$ 250,00
-    4 | fim do tempo             | LIDERANDO  -> ENCERRADO    | arrematar
-Resultado: ARREMATOU por R$ 250,00
+Limite: 300 | Incremento: 20
+150 | p1 | SUPERADO -> LIDERANDO | dar lance
+190 | p1 | LIDERANDO -> LIDERANDO | dar lance
+230 | p1 | LIDERANDO -> LIDERANDO | dar lance
+fim | p3 | LIDERANDO -> ENCERRADO | arrematar
+Arrematou por 250
 
-=== Cenário 2 — rival passa do limite ===
-Limite do agente: R$ 300,00 | incremento: R$ 20,00
-passo | percepção                | estado -> próximo          | ação
-------+--------------------------+----------------------------+---------------------------
-    1 | rival deu R$ 200,00      | SUPERADO   -> LIDERANDO    | dar lance de R$ 220,00
-    2 | rival deu R$ 240,00      | LIDERANDO  -> LIDERANDO    | dar lance de R$ 260,00
-    3 | rival deu R$ 290,00      | LIDERANDO  -> ENCERRADO    | desistir (passaria do limite)
-Resultado: não arrematou — último lance do agente: R$ 260,00
+Limite: 300 | Incremento: 20
+200 | p1 | SUPERADO -> LIDERANDO | dar lance
+240 | p1 | LIDERANDO -> LIDERANDO | dar lance
+290 | p2 | LIDERANDO -> ENCERRADO | desistir
+Nao arrematou
 ```
 
 ---
