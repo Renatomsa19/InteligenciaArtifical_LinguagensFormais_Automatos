@@ -16,7 +16,7 @@ Atividades práticas da disciplina INTELIGÊNCIA ARTIFICIAL, LINGUAGENS FORMAIS 
 ## Como executar os códigos
 
 ```bash
-python Expressoes_Regulares_Validacao_Email/validador_email.py --teste
+python Expressoes_Regulares_Validacao_Email/validador_email.py
 python Aula11_Agentes_Inteligentes/agente_leilao_automato.py
 ```
 
