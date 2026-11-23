@@ -1,7 +1,10 @@
 # Sistema Especialista: Quanto Abastecer Antes da Viagem
 
 **Aluno:** Renato Miranda de Souza Araujo Alves  
-**RGM:** 38989611  
+**RGM:** 38989611
+**Aluno:** Vitor Hugo Duarte Lima   
+**RGM:** 38853558
+
 **Disciplina:** Inteligência Artificial e LFA | Sistemas Especialistas  
 **Professora:** Kadidja Valéria
 
