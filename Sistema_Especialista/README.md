@@ -6,6 +6,9 @@
 **Aluno:** Vitor Hugo Duarte Lima   
 **RGM:** 38853558
 
+**Aluno:** Victor Silva Amador   
+**RGM:**38136104
+
 **Disciplina:** Inteligência Artificial e LFA | Sistemas Especialistas  
 **Professora:** Kadidja Valéria
 
